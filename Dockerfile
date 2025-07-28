@@ -8,7 +8,8 @@ ENV PYTHONUNBUFFERED=1 \
 
 COPY pyproject.toml uv.lock ./
 
-RUN pip install uv && uv pip install --system --no-deps
+RUN pip install uv && uv pip install -r pyproject.toml
+
 
 COPY . .
 
