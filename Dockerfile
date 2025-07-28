@@ -1,5 +1,8 @@
 FROM python:3.13
 
+COPY --from=ghcr.io/astral-sh/uv:0.8.2 /uv /uvx /bin/
+
+
 WORKDIR /app
 
 ENV PYTHONUNBUFFERED=1 \
@@ -8,7 +11,7 @@ ENV PYTHONUNBUFFERED=1 \
 
 COPY pyproject.toml uv.lock ./
 
-RUN pip install uv && uv pip install --system --no-deps --all
+RUN uv sync --locked
 
 COPY . .
 
